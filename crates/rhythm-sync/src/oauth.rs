@@ -259,6 +259,11 @@ fn read_callback(
     redirect_uri: &str,
     expected_state: &str,
 ) -> Result<Callback> {
+    // Accepted sockets inherit the listener's nonblocking mode on some systems
+    // (notably BSD/macOS). The header reader relies on bounded blocking reads,
+    // so configure that mode explicitly rather than treating WouldBlock as a
+    // malformed request and closing a browser's partially written callback.
+    stream.set_nonblocking(false).map_err(|_| Error::Loopback)?;
     stream
         .set_read_timeout(Some(Duration::from_secs(2)))
         .map_err(|_| Error::Loopback)?;
@@ -549,5 +554,94 @@ mod tests {
                 .finish(Duration::ZERO),
             Err(Error::AuthorizationTimeout)
         ));
+    }
+
+    fn callback_streams() -> (TcpStream, TcpStream) {
+        let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+        let client = TcpStream::connect(listener.local_addr().unwrap()).unwrap();
+        let (server, _) = listener.accept().unwrap();
+        // Reproduce inherited nonblocking mode on every test platform.
+        server.set_nonblocking(true).unwrap();
+        (client, server)
+    }
+
+    #[test]
+    fn callback_accepts_fragmented_headers_on_an_initially_nonblocking_stream() {
+        use std::sync::mpsc::{self, RecvTimeoutError};
+        let (mut client, mut server) = callback_streams();
+        let (sent, received) = mpsc::channel();
+        let worker = thread::spawn(move || {
+            sent.send(read_callback(
+                &mut server,
+                "http://127.0.0.1:1234/callback",
+                "expected",
+            ))
+            .unwrap();
+        });
+        // A connection may arrive before any request bytes. It is not invalid.
+        assert!(matches!(
+            received.recv_timeout(Duration::from_millis(50)),
+            Err(RecvTimeoutError::Timeout)
+        ));
+        for chunk in [
+            b"GET /callback?state=expec".as_slice(),
+            b"ted&code=fragmented-code HTTP/1.1\r\nHost: localhost\r\n",
+            b"\r",
+        ] {
+            client.write_all(chunk).unwrap();
+            assert!(matches!(
+                received.recv_timeout(Duration::from_millis(50)),
+                Err(RecvTimeoutError::Timeout)
+            ));
+        }
+        client.write_all(b"\n").unwrap();
+        assert!(matches!(
+            received.recv_timeout(Duration::from_secs(3)).unwrap(),
+            Ok(Callback::Code(code)) if code == "fragmented-code"
+        ));
+        worker.join().unwrap();
+    }
+
+    #[test]
+    fn callback_rejects_incomplete_and_oversized_headers() {
+        let incomplete =
+            b"GET /callback?state=expected&code=a HTTP/1.1\r\nHost: localhost\r\n".to_vec();
+        let mut oversized =
+            b"GET /callback?state=expected&code=a HTTP/1.1\r\nHost: localhost\r\nX-Padding: "
+                .to_vec();
+        oversized.extend(std::iter::repeat_n(b'x', 16 * 1024));
+        oversized.extend_from_slice(b"\r\n\r\n");
+        for request in [incomplete, oversized] {
+            let (mut client, mut server) = callback_streams();
+            client.write_all(&request).unwrap();
+            client.shutdown(std::net::Shutdown::Write).unwrap();
+            assert!(matches!(
+                read_callback(&mut server, "http://127.0.0.1:1234/callback", "expected"),
+                Err(Error::Protocol)
+            ));
+        }
+    }
+
+    #[test]
+    fn callback_blocking_read_keeps_the_stalled_connection_timeout() {
+        let (client, mut server) = callback_streams();
+        let (sent, received) = std::sync::mpsc::channel();
+        let started = Instant::now();
+        let worker = thread::spawn(move || {
+            sent.send(read_callback(
+                &mut server,
+                "http://127.0.0.1:1234/callback",
+                "expected",
+            ))
+            .unwrap();
+        });
+        let result = received.recv_timeout(Duration::from_secs(6));
+        let elapsed = started.elapsed();
+        // Also release the peer before joining if the timeout ever regresses.
+        drop(client);
+        worker.join().unwrap();
+        assert!(matches!(result.unwrap(), Err(Error::Protocol)));
+        assert!(elapsed >= Duration::from_secs(1));
+        assert!(elapsed < Duration::from_secs(6));
     }
 }
