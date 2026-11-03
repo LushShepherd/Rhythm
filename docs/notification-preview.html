@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rhythm · Windows notification layout preview</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-content:center;background:radial-gradient(ellipse at 25% 85%,#415354,transparent 65%),#20272b;font-family:"Segoe UI Variable","Segoe UI",sans-serif;color:#f5f5f5;padding:42px}.preview{width:min(480px,calc(100vw - 60px))}.label{font-size:12px;letter-spacing:.06em;color:#bec8c6;margin:0 0 14px}.notification{padding:18px 20px 23px;border:1px solid #ffffff19;border-radius:9px;background:linear-gradient(145deg,#353738ed,#292b2cee);box-shadow:0 8px 35px #0005}.app{display:flex;align-items:center;gap:9px;color:#dedede;font-size:12px;margin-bottom:20px}.app svg{width:18px;height:18px;color:#ced8c8}.spacer{flex:1}.menu{font-size:18px;line-height:14px;color:#c4c4c4;margin-right:15px}.close{font-size:18px;font-weight:300;color:#c4c4c4}.content{margin-left:27px}.title{font-weight:600;font-size:15px;margin:0 0 7px;line-height:1.4}.body{font-size:14px;line-height:1.5;margin:0;color:#f2f2f2}.caption{font-size:12px;line-height:1.6;color:#bec8c6;margin:17px 0 0}
+</style>
+<style>
+.actions{display:flex;gap:8px;margin:20px 0 0 27px}.action{flex:1;text-align:center;padding:9px 10px;border:1px solid #ffffff20;border-radius:4px;background:#ffffff0c;color:#f2f2f2;font-size:13px;line-height:1.4}.notification+.label{margin-top:28px}
+</style>
+<main class="preview">
+<p class="label">FOCUS → BREAK · WINDOWS LAYOUT PREVIEW</p>
+<div class="notification" role="img" aria-label="Approximate Windows notification layout with Rhythm's current reminder text">
+  <div class="app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10 3a9 9 0 0 0 0 18M14 3a9 9 0 0 1 0 18M12 2v20"/></svg><span>Rhythm</span><span class="spacer"></span><span class="menu">···</span><span class="close">×</span></div>
+  <div class="content"><p class="title">A little room to rest</p><p class="body">Your focus period is complete. Return to Rhythm when you are ready.</p></div>
+  <div class="actions" aria-hidden="true"><span class="action">Take a break</span><span class="action">Stay focused</span></div>
+</div>
+<p class="label">BREAK → FOCUS · WINDOWS LAYOUT PREVIEW</p>
+<div class="notification" role="img" aria-label="Approximate Windows notification layout when a break is complete">
+  <div class="app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10 3a9 9 0 0 0 0 18M14 3a9 9 0 0 1 0 18M12 2v20"/></svg><span>Rhythm</span><span class="spacer"></span><span class="menu">···</span><span class="close">×</span></div>
+  <div class="content"><p class="title">Ready when you are</p><p class="body">Your rest is complete. Begin another focus period when you choose.</p></div>
+  <div class="actions" aria-hidden="true"><span class="action">Focus</span><span class="action">Keep resting</span></div>
+</div>
+<p class="caption">Current choices; approximate Windows layouts.<br>Static previews only. Windows controls the appearance; delivery and actions require Rhythm to be running. In the app, the existing switch expands into an inline choice with a small numberless ring.</p>
+</main>
+</html>

@@ -1,0 +1,10 @@
+Rhythm built-in photographic backgrounds
+Generated using the built-in image_gen tool, November 1, 2026.
+Project assets: focus-still.png and break-still.png.
+Original generated files remain in the Codex generated_images directory.
+
+FOCUS PROMPT
+Use case: photorealistic-natural. Asset type: full-bleed offline background for a calm minimalist focus application. Create a refined fine-art landscape photograph, wide 16:10 composition, of a remote Pacific Northwest alpine lake at very early dawn, viewed through subtle soft-focus evergreen silhouettes at the far edges. Vast still water, layered distant forested slopes dissolving into natural silver-sage mist. The middle of the photograph must be smooth low-detail atmospheric space suitable for small white UI typography. Dark charcoal olive, deep muted forest green, cool stone, soft warm gray, restrained tonal range. Real photographic organic texture, gentle soft light, elegant sophisticated visual depth, slight film grain. No cartoon, no vector art, no repeating identical trees, no oversharpening, no hard bright sun, no dramatic contrast, no buildings, no people, no text, no logos. A contemplative place, understated beauty. Make the landscape fill the whole frame.
+
+BREAK PROMPT
+Use case: photorealistic-natural. Asset type: full-bleed offline background for a calm minimalist rest application. Create a refined fine-art coastal photograph, wide 16:10 composition, of an empty tranquil coastline at blue hour. A thin soft tide washes over dark smooth wet sand; a distant rocky headland dissolves into violet-gray coastal haze on one side. Broad luminous but subdued smoky lavender sky and glassy gray ocean in the center provide very low-detail negative space for white interface typography. Delicate reflections of muted pale peach and lilac along the horizon, cool charcoal foreground. Real natural photographic texture and cinematic depth, soft lens rendering, subtle film grain, restrained tonal range. Elegant and quietly beautiful; no cartoon, no vector art, no brilliant sunset, no bright disk sun, no people, no buildings, no text, no logo. Fill the frame edge-to-edge.

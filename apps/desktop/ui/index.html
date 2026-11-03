@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-state="init">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#18221f">
+  <meta name="description" content="A private, gentle companion for focus and recovery. Find your own rhythm, one moment at a time.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Rhythm">
+  <title>Rhythm</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/rhythm-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/rhythm-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+  <div id="app">
+    <header class="app-header"><span class="brand">Rhythm</span></header>
+    <main class="stage"><p class="muted">Opening your space…</p></main>
+  </div>
+  <div id="error" class="error" role="alert" hidden></div>
+  <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
+  <dialog id="settings-dialog" class="settings-panel" aria-labelledby="settings-title"></dialog>
+  <dialog id="archive-dialog" class="settings-panel note-archive-panel" aria-labelledby="archive-title"></dialog>
+  <dialog id="restore-dialog" class="confirmation-panel" aria-labelledby="restore-title" aria-describedby="restore-detail restore-safety"></dialog>
+  <dialog id="close-dialog" class="confirmation-panel" aria-labelledby="close-title">
+    <h2 id="close-title"></h2><p id="close-detail"></p>
+    <p id="close-error" role="alert" hidden></p>
+    <div class="actions"><button id="keep-open" class="primary" data-action="true"></button><button id="quit-app" class="secondary" data-action="true"></button></div>
+  </dialog>
+</body>
+</html>

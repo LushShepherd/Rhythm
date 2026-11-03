@@ -1,0 +1,28 @@
+[package]
+name = "rhythm-platform-windows"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+
+[dependencies]
+rhythm-domain.workspace = true
+thiserror.workspace = true
+uuid.workspace = true
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_System_Power", "Win32_System_SystemInformation", "Win32_System_WindowsProgramming", "Win32_UI_WindowsAndMessaging"] }
+
+[dev-dependencies]
+rhythm-application.workspace = true
+rhythm-storage.workspace = true
+tempfile.workspace = true
+
+# The rest of the workspace forbids unsafe code. Only the private Windows FFI
+# module below opts in; the public adapter and portable fallback remain safe Rust.
+[lints.rust]
+unsafe_code = "deny"
+
+[lints.clippy]
+all = "warn"

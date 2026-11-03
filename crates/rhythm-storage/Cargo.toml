@@ -1,0 +1,27 @@
+[package]
+name = "rhythm-storage"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+
+[dependencies]
+rhythm-domain = { path = "../rhythm-domain" }
+rhythm-application = { path = "../rhythm-application" }
+rusqlite = { workspace = true, features = ["functions"] }
+chrono = { version = "0.4", default-features = false, features = ["std"] }
+chrono-tz = "0.10"
+iana-time-zone = "0.1"
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+same-file = "1.0.6"
+thiserror.workspace = true
+uuid.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+
+[lints]
+workspace = true

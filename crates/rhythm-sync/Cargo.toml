@@ -1,0 +1,24 @@
+[package]
+name = "rhythm-sync"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+sha2.workspace = true
+uuid.workspace = true
+# Desktop applications must honor the OS proxy settings used by the user's browser.
+reqwest = { version = "0.13", default-features = false, features = ["blocking", "json", "form", "query", "native-tls", "system-proxy"] }
+url = "2"
+base64 = "0.23"
+aes-gcm = "0.10"
+pbkdf2 = "0.12"
+zeroize = { version = "1", features = ["derive"] }
+
+[lints]
+workspace = true

@@ -1,0 +1,40 @@
+[package]
+name = "rhythm-desktop"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
+
+[target.'cfg(windows)'.dependencies]
+rhythm-domain.workspace = true
+rhythm-desktop-service.workspace = true
+rhythm-platform-windows.workspace = true
+rhythm-sync.workspace = true
+sha2.workspace = true
+tempfile.workspace = true
+zeroize = "1"
+serde.workspace = true
+serde_json.workspace = true
+rhythm-control = { path = "../../../crates/rhythm-control" }
+uuid.workspace = true
+windows = { version = "0.62.2", features = ["Data_Xml_Dom", "Foundation", "UI_Notifications", "Win32_Foundation", "Win32_Security_Cryptography", "Win32_UI_Controls_Dialogs", "Win32_UI_Shell", "Win32_UI_WindowsAndMessaging"] }
+tauri = { version = "2", features = [] }
+tauri-plugin-single-instance = "2"
+
+[target.'cfg(windows)'.build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[target.'cfg(windows)'.dev-dependencies]
+rhythm-storage.workspace = true
+
+# Only the private native file-dialog and session-ending modules opt into Win32 FFI.
+[lints.rust]
+unsafe_code = "deny"
+
+[lints.clippy]
+all = "warn"

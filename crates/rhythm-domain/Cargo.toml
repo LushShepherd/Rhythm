@@ -1,0 +1,21 @@
+[package]
+name = "rhythm-domain"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+description = "GUI-independent timer state machine for Rhythm"
+publish.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+thiserror.workspace = true
+chrono = { version = "0.4", default-features = false, features = ["std"] }
+chrono-tz = "0.10"
+
+[dev-dependencies]
+serde_json.workspace = true
+proptest.workspace = true
+
+[lints]
+workspace = true

@@ -1,0 +1,348 @@
+<div id="rhythm-concepts" class="viz-carousel" aria-label="Rhythm interface concepts">
+  <section data-variant="Quiet room" aria-label="Quiet room design">
+    <div class="rhythm-preview-tools viz-row">
+      <span class="text-small text-muted" data-demo-label="quiet">Interactive concept · sample journal</span>
+      <button type="button" class="btn btn-ghost" data-demo-end="quiet">Finish current period</button>
+      <button type="button" class="btn btn-ghost" data-demo-reset="quiet">Restart preview</button>
+    </div>
+    <div class="rhythm-app rhythm-quiet" data-app="quiet" aria-label="Quiet room preview"></div>
+  </section>
+  <section data-variant="Letters" aria-label="Letters design" hidden>
+    <div class="rhythm-preview-tools viz-row">
+      <span class="text-small text-muted" data-demo-label="letters">Interactive concept · sample journal</span>
+      <button type="button" class="btn btn-ghost" data-demo-end="letters">Finish current period</button>
+      <button type="button" class="btn btn-ghost" data-demo-reset="letters">Restart preview</button>
+    </div>
+    <div class="rhythm-app rhythm-letters" data-app="letters" aria-label="Letters preview"></div>
+  </section>
+</div>
+<style>
+  #rhythm-concepts .rhythm-preview-tools { min-height: 58px; padding-right: 90px; margin-bottom: 12px; }
+  #rhythm-concepts .rhythm-app {
+    --rh-bg: light-dark(#f7f5ee, #20231f);
+    --rh-paper: light-dark(#fffcf5, #292c27);
+    --rh-ink: light-dark(#323b32, #e9e8df);
+    --rh-muted: light-dark(#626b5f, #b7bdb1);
+    --rh-line: light-dark(#d9ddd1, #484e43);
+    --rh-sage: light-dark(#e1e8d9, #333f32);
+    --rh-strong: light-dark(#3c5140, #d7e1c9);
+    --rh-on-strong: light-dark(#fffef6, #263126);
+    --rh-clay: light-dark(#ede2d3, #443b31);
+    --rh-error: light-dark(#8c3e32, #ffb7aa);
+    background: var(--rh-bg); color: var(--rh-ink); border: 1px solid var(--rh-line);
+    border-radius: 18px; min-height: 780px; overflow: clip; box-sizing: border-box; position: relative;
+    font: 400 15px/1.5 "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  #rhythm-concepts .rhythm-app * { box-sizing: border-box; }
+  #rhythm-concepts .rhythm-app h1, #rhythm-concepts .rhythm-app h2, #rhythm-concepts .rhythm-app h3,
+  #rhythm-concepts .rhythm-app p { margin: 0; color: inherit; }
+  #rhythm-concepts .rhythm-app h1 { font: 400 clamp(31px, 4.4vw, 47px)/1.17 Georgia, "Noto Serif CJK SC", serif; letter-spacing: -.025em; }
+  #rhythm-concepts .rhythm-app h2 { font: 400 28px/1.2 Georgia, "Noto Serif CJK SC", serif; letter-spacing: -.015em; }
+  #rhythm-concepts .rhythm-app h3 { font: 500 15px/1.4 "Segoe UI", "Microsoft YaHei", sans-serif; }
+  #rhythm-concepts .rhythm-app button, #rhythm-concepts .rhythm-app input,
+  #rhythm-concepts .rhythm-app select, #rhythm-concepts .rhythm-app textarea { font: inherit; }
+  #rhythm-concepts .rhythm-app button { min-height: 42px; border: 0; border-radius: 8px; padding: 10px 16px; color: var(--rh-ink); background: transparent; }
+  #rhythm-concepts .rhythm-app button:hover { background: var(--rh-sage); }
+  #rhythm-concepts .rhythm-app .rh-primary { background: var(--rh-strong); color: var(--rh-on-strong); padding-inline: 24px; }
+  #rhythm-concepts .rhythm-app .rh-primary:hover { filter: brightness(.96); }
+  #rhythm-concepts .rhythm-app .rh-secondary { border: 1px solid var(--rh-line); background: var(--rh-paper); }
+  #rhythm-concepts .rhythm-app .rh-link { text-decoration: underline; text-decoration-color: var(--rh-line); text-underline-offset: 5px; color: var(--rh-muted); }
+  #rhythm-concepts .rhythm-app input, #rhythm-concepts .rhythm-app select, #rhythm-concepts .rhythm-app textarea {
+    width: 100%; background: var(--rh-paper); color: var(--rh-ink); border: 1px solid var(--rh-line); border-radius: 8px; padding: 12px 14px; min-width: 0;
+  }
+  #rhythm-concepts .rhythm-app textarea { min-height: 116px; resize: vertical; line-height: 1.65; }
+  #rhythm-concepts .rhythm-app input::placeholder, #rhythm-concepts .rhythm-app textarea::placeholder { color: var(--rh-muted); opacity: 1; }
+  #rhythm-concepts .rh-header { padding: 23px 30px; display: flex; align-items: center; justify-content: space-between; gap: 14px; border-bottom: 1px solid var(--rh-line); }
+  #rhythm-concepts .rh-brand { font: 400 25px/1 Georgia, serif; letter-spacing: -.04em; display: flex; align-items: center; gap: 9px; }
+  #rhythm-concepts .rh-brand i { color: var(--rh-muted); }
+  #rhythm-concepts .rh-nav { display: flex; gap: 3px; flex-wrap: wrap; justify-content: flex-end; }
+  #rhythm-concepts .rh-nav button { font-size: 13px; color: var(--rh-muted); padding-inline: 12px; }
+  #rhythm-concepts .rh-nav button[aria-current="page"] { color: var(--rh-ink); background: var(--rh-sage); }
+  #rhythm-concepts .rh-body { padding: 42px 50px 28px; }
+  #rhythm-concepts .rh-home { display: grid; min-height: 596px; align-content: center; justify-items: center; text-align: center; gap: 24px; padding: 54px 24px; }
+  #rhythm-concepts .rh-kicker { color: var(--rh-muted); text-transform: uppercase; letter-spacing: .14em; font-size: 11px; font-weight: 500; }
+  #rhythm-concepts .rh-sub { max-width: 420px; color: var(--rh-muted); }
+  #rhythm-concepts .rh-intention { width: min(100%, 430px); text-align: left; display: grid; gap: 9px; }
+  #rhythm-concepts .rh-label { display: block; font-size: 13px; color: var(--rh-muted); margin-bottom: 7px; }
+  #rhythm-concepts .rh-caption { font-size: 12px; color: var(--rh-muted); }
+  #rhythm-concepts .rh-actions { display: flex; align-items: center; justify-content: center; gap: 9px; flex-wrap: wrap; }
+  #rhythm-concepts .rh-bottom { padding: 15px 28px 19px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--rh-muted); }
+  #rhythm-concepts .rh-letter-teaser { border-top: 1px solid var(--rh-line); padding-top: 20px; max-width: 440px; text-align: center; }
+  #rhythm-concepts .rh-letter-teaser p { font-family: Georgia, "Noto Serif CJK SC", serif; font-size: 17px; }
+  #rhythm-concepts .rh-still { width: 80px; height: 5px; background: var(--rh-sage); border-radius: 99px; margin: 8px 0; }
+  #rhythm-concepts .rh-running { display: grid; justify-items: center; text-align: center; align-content: center; min-height: 590px; gap: 26px; padding: 48px 30px; }
+  #rhythm-concepts .rh-running .rh-intention-note { max-width: 470px; font: 400 19px/1.6 Georgia, "Noto Serif CJK SC", serif; overflow-wrap: anywhere; }
+  #rhythm-concepts .rh-resting { background: var(--rh-sage); }
+  #rhythm-concepts .rh-resting .rh-still { background: var(--rh-line); }
+  #rhythm-concepts .rh-rest-ideas { display: flex; justify-content: center; flex-wrap: wrap; gap: 9px; }
+  #rhythm-concepts .rh-rest-ideas button { border: 1px solid var(--rh-line); background: var(--rh-paper); font-size: 13px; }
+  #rhythm-concepts .rh-rest-ideas button[aria-pressed="true"] { background: var(--rh-strong); color: var(--rh-on-strong); }
+  #rhythm-concepts .rh-reflection { max-width: 550px; margin: 0 auto; display: grid; gap: 22px; padding-top: 32px; text-align: center; min-height: 590px; align-content: center; }
+  #rhythm-concepts .rh-reflection textarea { min-height: 150px; }
+  #rhythm-concepts .rh-notebook { display: grid; grid-template-columns: 170px 1fr; min-height: 596px; }
+  #rhythm-concepts .rh-notebook-side { padding: 39px 24px; border-right: 1px solid var(--rh-line); display: flex; flex-direction: column; gap: 22px; }
+  #rhythm-concepts .rh-notebook-main { padding: 42px 38px; }
+  #rhythm-concepts .rh-letter-card { background: var(--rh-paper); border: 1px solid var(--rh-line); border-radius: 10px; padding: 25px; margin-top: 20px; }
+  #rhythm-concepts .rh-letter-card p { font: 400 20px/1.65 Georgia, "Noto Serif CJK SC", serif; white-space: pre-wrap; overflow-wrap: anywhere; margin: 15px 0; }
+  #rhythm-concepts .rh-letter-card button { padding-left: 0; font-size: 13px; }
+  #rhythm-concepts .rh-edit-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  #rhythm-concepts .rh-edit-actions button { padding-inline: 16px; }
+  #rhythm-concepts .rh-settings { max-width: 720px; margin-inline: auto; }
+  #rhythm-concepts .rh-settings h2 { margin-bottom: 10px; }
+  #rhythm-concepts .rh-settings h3 { margin: 24px 0 13px; }
+  #rhythm-concepts .rh-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; }
+  #rhythm-concepts .rh-fields label { min-width: 0; }
+  #rhythm-concepts .rh-setting-notice { padding: 16px 0; color: var(--rh-muted); font-size: 13px; }
+  #rhythm-concepts .rh-private-row { border-top: 1px solid var(--rh-line); margin-top: 20px; padding-top: 17px; display: flex; gap: 16px; justify-content: space-between; flex-wrap: wrap; font-size: 13px; color: var(--rh-muted); }
+  #rhythm-concepts .rh-alert { min-height: 24px; color: var(--rh-error); font-size: 13px; margin-top: 12px; }
+  #rhythm-concepts .rhythm-letters .rh-home { grid-template-columns: minmax(0, 1fr) minmax(0, .85fr); align-content: stretch; align-items: center; text-align: left; justify-items: stretch; padding: 0; gap: 0; }
+  #rhythm-concepts .rhythm-letters .rh-home-main { display: grid; align-content: center; gap: 25px; padding: 52px 38px; }
+  #rhythm-concepts .rhythm-letters .rh-home-main .rh-actions { justify-content: flex-start; }
+  #rhythm-concepts .rh-home-aside { min-height: 100%; background: var(--rh-clay); padding: 52px 30px; display: grid; align-content: center; gap: 24px; }
+  #rhythm-concepts .rh-home-aside blockquote { margin: 0; font: 400 24px/1.6 Georgia, "Noto Serif CJK SC", serif; }
+  #rhythm-concepts .rh-home-aside .rh-link { padding-left: 0; justify-self: start; }
+  #rhythm-concepts .rhythm-letters .rh-brand { font-style: italic; }
+  #rhythm-concepts .rh-status { width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); position: absolute; white-space: nowrap; }
+  @media (max-width: 650px) {
+    #rhythm-concepts .rhythm-preview-tools { padding-right: 0; }
+    #rhythm-concepts .rhythm-app { min-height: 1080px; }
+    #rhythm-concepts .rh-header { padding: 22px 18px; align-items: flex-start; flex-wrap: wrap; }
+    #rhythm-concepts .rh-nav { width: 100%; justify-content: flex-start; gap: 2px; }
+    #rhythm-concepts .rh-nav button { padding-inline: 10px; }
+    #rhythm-concepts .rh-body { padding: 30px 20px 24px; }
+    #rhythm-concepts .rh-home { min-height: 820px; padding-inline: 22px; }
+    #rhythm-concepts .rhythm-letters .rh-home { grid-template-columns: 1fr; }
+    #rhythm-concepts .rhythm-letters .rh-home-main { padding: 36px 24px; }
+    #rhythm-concepts .rh-home-aside { padding: 30px 24px; }
+    #rhythm-concepts .rh-home-aside blockquote { font-size: 22px; }
+    #rhythm-concepts .rh-bottom { padding-inline: 20px; flex-wrap: wrap; }
+    #rhythm-concepts .rh-running { min-height: 850px; padding: 40px 23px; }
+    #rhythm-concepts .rh-notebook { grid-template-columns: 1fr; min-height: 860px; }
+    #rhythm-concepts .rh-notebook-side { padding: 20px 24px; border-right: 0; border-bottom: 1px solid var(--rh-line); gap: 8px; }
+    #rhythm-concepts .rh-notebook-main { padding: 27px 20px; }
+    #rhythm-concepts .rh-fields { grid-template-columns: 1fr; }
+    #rhythm-concepts .rh-reflection { min-height: 800px; }
+    #rhythm-concepts .rhythm-app input, #rhythm-concepts .rhythm-app select, #rhythm-concepts .rhythm-app textarea { font-size: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) { #rhythm-concepts .rhythm-app * { animation: none !important; transition: none !important; } }
+  @media (pointer: coarse) { #rhythm-concepts .rhythm-app button { min-height: 44px; } }
+</style>
+<script>
+(() => {
+  const root = document.getElementById('rhythm-concepts');
+  const copy = {
+    en: {
+      now:'Now', journal:'Letters', advanced:'Advanced', room:'A little space for yourself', hello:'Make a little room.', intro:'One thing at a time. A real pause in between.',
+      intention:'An intention, if you have one', intentionPlaceholder:'What would you like to be present for?', begin:'Begin focus', rhythm:'25 minutes of focus, then a little rest.',
+      letterFrom:'A letter from an earlier you', sample:'Dear me,\nThe walk helped more than another hour at my desk. Leave yourself a little space.', read:'Open your letters',
+      local:'Your words, your space', ready:'Whenever you’re ready', focusLabel:'A quiet moment', focusTitle:'You can be here.', focusSub:'There is nothing to keep up with.',
+      endEarly:'End this period', exit:'I need to stop', focused:'This moment is complete.', focusPrompt:'What would you like your next self to remember?', restPrompt:'What feels a little different now?',
+      optional:'A few words, or none at all.', reflectionPlaceholder:'Dear future me,', save:'Keep these words', skip:'Continue without writing', restReady:'Make room for rest.', restReadySub:'Let your attention move somewhere else for a while.',
+      startRest:'Begin rest', longRest:'A longer rest is waiting.', restTitle:'Let your attention wander.', restSub:'You do not need to do anything useful.',
+      walk:'Take a walk', water:'Drink some water', eyes:'Rest your eyes', breathe:'Soften your shoulders', walkText:'A few unhurried steps. Somewhere beyond this screen.', waterText:'Leave the screen and refill your glass.', eyesText:'Look away from the screen and into the distance.', breatheText:'Let your shoulders fall. Breathe at your own pace.',
+      restDone:'Welcome back.', nextReady:'Return at your own pace.', nextSub:'Begin another quiet moment only when you want to.', startFocus:'Begin focus', later:'Enough for now',
+      letterTitle:'Words to return to', letterIntro:'Small letters between different versions of you.', sampleLabel:'Sample letter', newLetter:'From this preview', today:'Today', earlier:'Earlier', edit:'Edit letter', saveEdit:'Keep edit', cancel:'Cancel', previewOnly:'Preview only · words and edits are not saved',
+      advancedTitle:'Make it your rhythm', advancedIntro:'The defaults are enough. Change only what helps.', durationTitle:'Your usual rhythm', focusMinutes:'Focus · minutes', shortMinutes:'Short rest · minutes', longMinutes:'Long rest · minutes', every:'Long rest after · focus periods',
+      experienceTitle:'How it feels', language:'Language', languageSystem:'Follow system', restStyle:'Rest invitation', invitation:'Gentle reminder', screen:'Full rest screen', appearance:'Appearance', appearanceSystem:'Follow system', light:'Light', dark:'Dark', apply:'Keep these settings', applied:'Preview settings updated. The next period will use them.',
+      confirmAlways:'Every period waits for your confirmation.', validation:'Use whole minutes from 1 to 180, and a long rest every 1 to 12 focus periods.',
+      cloud:'Sync · not connected', ai:'AI reviews · off', advancedFuture:'Schedules, cloud connection and AI reviews are design plans.',
+      demo:'Interactive concept · sample journal', finish:'Finish current period', restart:'Restart preview', interrupted:'Stopped gently. You can begin again whenever you like.',
+      pausedTitle:'There is no hurry.', pausedSub:'This period ended early. It does not count as a completed focus period.', restartHome:'Return home', minute:'minutes',
+      elapsed:'Preview period completed', notesKept:'Words added to the preview journal', noteEdited:'Letter updated in this preview', mainNav:'Main navigation',
+      minutesPattern:'{focus} minutes of focus, then {rest} minutes of rest.', restLength:'{rest} minutes, when you’re ready.', setupHeading:'Settle into the next moment.',
+      lettersHero:'A moment for now.\nA letter for later.', lettersIntro:'Leave a few words for the person you will be when you return.', fullscreenHint:'Focus'
+    },
+    'zh-Hans': {
+      now:'此刻', journal:'给自己的信', advanced:'高级设置', room:'留一点空间给自己', hello:'给此刻留一点空白。', intro:'一次专注一件事，中间好好休息。',
+      intention:'如果愿意，写下此刻的心意', intentionPlaceholder:'此刻，你想把心放在哪里？', begin:'开始专注', rhythm:'专注 25 分钟，然后歇一会儿。',
+      letterFrom:'来自过去的你的一封信', sample:'亲爱的自己：\n散步比再坐一小时更有帮助。记得为自己留一点空间。', read:'翻开给自己的信',
+      local:'你的文字，你的空间', ready:'准备好了再开始', focusLabel:'安静的一刻', focusTitle:'安心在此刻。', focusSub:'不用赶上任何节奏。',
+      endEarly:'结束这一段', exit:'我需要停止', focused:'这一刻，告一段落。', focusPrompt:'有什么想让下一个自己记住？', restPrompt:'休息之后，有什么小小的不同？',
+      optional:'写几句话，或什么也不写。', reflectionPlaceholder:'亲爱的未来的我：', save:'留下这些话', skip:'不写，继续', restReady:'给休息留一点空间。', restReadySub:'让注意力暂时去别处走走。',
+      startRest:'开始休息', longRest:'可以好好休息一会儿了。', restTitle:'让注意力自由走走。', restSub:'此刻，不必做有用的事。',
+      walk:'走一走', water:'喝点水', eyes:'让眼睛休息', breathe:'放松肩膀', walkText:'慢慢走几步，离开这块屏幕。', waterText:'离开屏幕，给杯子添点水。', eyesText:'放下屏幕，望一望远处。', breatheText:'放下肩膀，按自己的节奏呼吸。',
+      restDone:'欢迎回来。', nextReady:'按自己的节奏回来。', nextSub:'想开始时，再开启下一段安静时光。', startFocus:'开始专注', later:'今天先到这里',
+      letterTitle:'可以回来的文字', letterIntro:'写给不同时刻的自己。', sampleLabel:'示例信件', newLetter:'本次预览中的信', today:'今天', earlier:'之前', edit:'编辑信件', saveEdit:'保留修改', cancel:'取消', previewOnly:'仅供预览 · 文字和修改不会保存',
+      advancedTitle:'找到自己的节奏', advancedIntro:'默认设置已经够用，只调整对你有帮助的部分。', durationTitle:'平常的节奏', focusMinutes:'专注 · 分钟', shortMinutes:'短休息 · 分钟', longMinutes:'长休息 · 分钟', every:'每完成几段专注后长休息',
+      experienceTitle:'使用感受', language:'语言', languageSystem:'跟随系统', restStyle:'休息提醒', invitation:'轻柔提醒', screen:'完整休息画面', appearance:'外观', appearanceSystem:'跟随系统', light:'浅色', dark:'深色', apply:'保留设置', applied:'预览设置已更新，下一段将使用新设置。',
+      confirmAlways:'每一段开始前，都等待你的确认。', validation:'请输入 1 到 180 的整数分钟，长休息间隔为 1 到 12 段专注。',
+      cloud:'同步 · 尚未连接', ai:'AI 回顾 · 关闭', advancedFuture:'日程、云端连接和 AI 回顾仍在设计中。',
+      demo:'交互概念 · 示例日记', finish:'模拟本段结束', restart:'重新预览', interrupted:'已经停下，想开始时再回来。',
+      pausedTitle:'不用着急。', pausedSub:'这一段提前结束，不计为已完成的专注。', restartHome:'返回此刻', minute:'分钟',
+      elapsed:'预览时段已完成', notesKept:'文字已加入预览日记', noteEdited:'预览中的信件已修改', mainNav:'主导航',
+      minutesPattern:'专注 {focus} 分钟，然后休息 {rest} 分钟。', restLength:'准备好后，休息 {rest} 分钟。', setupHeading:'安静地进入下一刻。',
+      lettersHero:'此刻的一段时光。\n留给未来的一封信。', lettersIntro:'为回来时的自己，留几句话。', fullscreenHint:'专注'
+    },
+    'zh-Hant': {
+      now:'此刻', journal:'給自己的信', advanced:'進階設定', room:'留一點空間給自己', hello:'給此刻留一點空白。', intro:'一次專注一件事，中間好好休息。',
+      intention:'如果願意，寫下此刻的心意', intentionPlaceholder:'此刻，你想把心放在哪裡？', begin:'開始專注', rhythm:'專注 25 分鐘，然後歇一會兒。',
+      letterFrom:'來自過去的你的一封信', sample:'親愛的自己：\n散步比再坐一小時更有幫助。記得為自己留一點空間。', read:'翻開給自己的信',
+      local:'你的文字，你的空間', ready:'準備好了再開始', focusLabel:'安靜的一刻', focusTitle:'安心在此刻。', focusSub:'不用趕上任何節奏。',
+      endEarly:'結束這一段', exit:'我需要停止', focused:'這一刻，告一段落。', focusPrompt:'有什麼想讓下一個自己記住？', restPrompt:'休息之後，有什麼小小的不同？',
+      optional:'寫幾句話，或什麼也不寫。', reflectionPlaceholder:'親愛的未來的我：', save:'留下這些話', skip:'不寫，繼續', restReady:'給休息留一點空間。', restReadySub:'讓注意力暫時去別處走走。',
+      startRest:'開始休息', longRest:'可以好好休息一會兒了。', restTitle:'讓注意力自由走走。', restSub:'此刻，不必做有用的事。',
+      walk:'走一走', water:'喝點水', eyes:'讓眼睛休息', breathe:'放鬆肩膀', walkText:'慢慢走幾步，離開這塊螢幕。', waterText:'離開螢幕，給杯子添點水。', eyesText:'放下螢幕，望一望遠處。', breatheText:'放下肩膀，按自己的節奏呼吸。',
+      restDone:'歡迎回來。', nextReady:'按自己的節奏回來。', nextSub:'想開始時，再開啟下一段安靜時光。', startFocus:'開始專注', later:'今天先到這裡',
+      letterTitle:'可以回來的文字', letterIntro:'寫給不同時刻的自己。', sampleLabel:'範例信件', newLetter:'本次預覽中的信', today:'今天', earlier:'之前', edit:'編輯信件', saveEdit:'保留修改', cancel:'取消', previewOnly:'僅供預覽 · 文字和修改不會儲存',
+      advancedTitle:'找到自己的節奏', advancedIntro:'預設設定已經夠用，只調整對你有幫助的部分。', durationTitle:'平常的節奏', focusMinutes:'專注 · 分鐘', shortMinutes:'短休息 · 分鐘', longMinutes:'長休息 · 分鐘', every:'每完成幾段專注後長休息',
+      experienceTitle:'使用感受', language:'語言', languageSystem:'跟隨系統', restStyle:'休息提醒', invitation:'輕柔提醒', screen:'完整休息畫面', appearance:'外觀', appearanceSystem:'跟隨系統', light:'淺色', dark:'深色', apply:'保留設定', applied:'預覽設定已更新，下一段將使用新設定。',
+      confirmAlways:'每一段開始前，都等待你的確認。', validation:'請輸入 1 到 180 的整數分鐘，長休息間隔為 1 到 12 段專注。',
+      cloud:'同步 · 尚未連接', ai:'AI 回顧 · 關閉', advancedFuture:'排程、雲端連接與 AI 回顧仍在設計中。',
+      demo:'互動概念 · 範例日記', finish:'模擬本段結束', restart:'重新預覽', interrupted:'已經停下，想開始時再回來。',
+      pausedTitle:'不用著急。', pausedSub:'這一段提前結束，不計為已完成的專注。', restartHome:'返回此刻', minute:'分鐘',
+      elapsed:'預覽時段已完成', notesKept:'文字已加入預覽日記', noteEdited:'預覽中的信件已修改', mainNav:'主導覽',
+      minutesPattern:'專注 {focus} 分鐘，然後休息 {rest} 分鐘。', restLength:'準備好後，休息 {rest} 分鐘。', setupHeading:'安靜地進入下一刻。',
+      lettersHero:'此刻的一段時光。\n留給未來的一封信。', lettersIntro:'為回來時的自己，留幾句話。', fullscreenHint:'專注'
+    }
+  };
+  const stages = ['home','focus','focusComplete','readyRest','rest','restComplete','readyFocus','stopped'];
+  const systemLanguage = () => {
+    const language = String(navigator.language || 'en').toLowerCase();
+    if (/^zh.*(hant|tw|hk|mo)/.test(language)) return 'zh-Hant';
+    return language.startsWith('zh') ? 'zh-Hans' : 'en';
+  };
+  const makeState = () => ({ stage:'home', view:'now', language:'system', appearance:'system', focus:25, short:5, long:30, every:3, completed:0, activeRestType:null, restStyle:'screen', intention:'', draft:'', letters:[], editing:null, restIdea:'walk', notice:'' });
+  const state = { quiet:makeState(), letters:makeState() };
+  const apps = { quiet:root.querySelector('[data-app="quiet"]'), letters:root.querySelector('[data-app="letters"]') };
+  const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const lang = s => s.language === 'system' ? systemLanguage() : s.language;
+  const words = s => copy[lang(s)] || copy.en;
+  const button = (label, action, style='rh-secondary', extra='') => `<button type="button" class="cursor-interaction ${style}" data-action="${action}" ${extra}>${esc(label)}</button>`;
+  const pattern = s => words(s).minutesPattern.replace('{focus}',s.focus).replace('{rest}',s.short);
+  const longRestDue = s => s.completed >= s.every;
+  const restMinutes = s => longRestDue(s) ? s.long : s.short;
+  const restLength = s => words(s).restLength.replace('{rest}',restMinutes(s));
+  function restore(saved) {
+    const data = saved && saved.privateContent;
+    if (!data || data.schema !== 1) return;
+    for (const key of Object.keys(state)) {
+      const prior = data[key];
+      if (!prior) continue;
+      if (['system','en','zh-Hans','zh-Hant'].includes(prior.language)) state[key].language = prior.language;
+      if (['system','light','dark'].includes(prior.appearance)) state[key].appearance = prior.appearance;
+    }
+  }
+  restore(window.openai && window.openai.widgetState);
+  function remember() {
+    if (!window.openai || !window.openai.setWidgetState) return;
+    const preferences = key => ({ language:state[key].language, appearance:state[key].appearance });
+    window.openai.setWidgetState({ modelContent:{ product:'Rhythm', conceptLanguages:{quiet:state.quiet.language,letters:state.letters.language} }, privateContent:{schema:1,quiet:preferences('quiet'),letters:preferences('letters')} }).catch(() => {});
+  }
+  const footer = t => `<footer class="rh-bottom"><span>${esc(t.local)}</span><span>${esc(t.ready)}</span></footer>`;
+  function header(s,t) {
+    const active = s.stage === 'focus' || s.stage === 'rest';
+    return `<header class="rh-header"><div class="rh-brand"><i data-lucide="sprout" aria-hidden="true"></i>rhythm</div>${active ? `<span class="rh-caption">${esc(s.stage === 'focus' ? t.fullscreenHint : t.restStyle)}</span>` : `<nav class="rh-nav" aria-label="${esc(t.mainNav)}">${['now','journal','advanced'].map(view => button(t[view],`view-${view}`,'',s.view === view ? 'aria-current="page"' : '')).join('')}</nav>`}</header>`;
+  }
+  function home(key,s,t) {
+    const intention = `<label class="rh-intention"><span class="rh-label">${esc(t.intention)}</span><input data-input="intention" maxlength="200" value="${esc(s.intention)}" placeholder="${esc(t.intentionPlaceholder)}"></label>`;
+    if (key === 'letters') {
+      return `<main class="rh-home"><div class="rh-home-main"><span class="rh-kicker">${esc(t.room)}</span><h1>${esc(t.lettersHero).replace(/\n/g,'<br>')}</h1><p class="rh-sub">${esc(t.lettersIntro)}</p>${intention}<div class="rh-actions">${button(t.begin,'start-focus','rh-primary')}</div><p class="rh-caption">${esc(pattern(s))}</p></div><aside class="rh-home-aside"><span class="rh-kicker">${esc(t.letterFrom)}</span><blockquote>${esc(t.sample).replace(/\n/g,'<br>')}</blockquote>${button(t.read,'view-journal','rh-link')}<span class="rh-caption">${esc(t.sampleLabel)}</span></aside></main>`;
+    }
+    return `<main class="rh-home"><span class="rh-kicker">${esc(t.room)}</span><h1>${esc(t.hello)}</h1><p class="rh-sub">${esc(t.intro)}</p><div class="rh-still" aria-hidden="true"></div>${intention}<div class="rh-actions">${button(t.begin,'start-focus','rh-primary')}</div><p class="rh-caption">${esc(pattern(s))}</p><div class="rh-letter-teaser"><p>${esc(t.letterFrom)}</p>${button(t.read,'view-journal','rh-link')}</div></main>`;
+  }
+  function moment(s,t) {
+    if (s.stage === 'focus') return `<main class="rh-running"><span class="rh-kicker">${esc(t.focusLabel)}</span><h1>${esc(t.focusTitle)}</h1><div class="rh-still" aria-hidden="true"></div><p class="rh-intention-note">${esc(s.intention || t.focusSub)}</p>${button(t.endEarly,'stop','rh-link')}</main>`;
+    if (s.stage === 'rest') return `<main class="rh-running ${s.restStyle==='screen'?'rh-resting':''}"><span class="rh-kicker">${esc(s.restStyle==='screen'?t.screen:t.invitation)}</span><h1>${esc(t.restTitle)}</h1><p class="rh-sub">${esc(t.restSub)}</p><div class="rh-still" aria-hidden="true"></div><p class="rh-sub">${esc(t[s.restIdea+'Text'])}</p><div class="rh-rest-ideas">${['walk','water','eyes','breathe'].map(idea => button(t[idea],`idea-${idea}`,'',`aria-pressed="${idea === s.restIdea}"`)).join('')}</div>${button(t.exit,'stop','rh-link')}</main>`;
+    if (s.stage === 'focusComplete' || s.stage === 'restComplete') {
+      const focusDone = s.stage === 'focusComplete';
+      return `<main class="rh-body"><div class="rh-reflection"><span class="rh-kicker">${esc(focusDone ? t.focused : t.restDone)}</span><h1>${esc(focusDone ? (longRestDue(s) ? t.longRest : t.restReady) : t.restPrompt)}</h1>${focusDone ? `<p class="rh-sub">${esc(t.focusPrompt)}</p>` : ''}<label><span class="rh-label">${esc(t.optional)}</span><textarea data-input="draft" maxlength="4000" placeholder="${esc(t.reflectionPlaceholder)}">${esc(s.draft)}</textarea></label><div class="rh-actions">${button(t.save,'keep-reflection','rh-primary')}${button(t.skip,'skip-reflection','rh-link')}</div><p class="rh-caption">${esc(t.previewOnly)}</p></div></main>`;
+    }
+    if (s.stage === 'readyRest') return `<main class="rh-running"><span class="rh-kicker">${esc(t.restStyle)}</span><h1>${esc(longRestDue(s) ? t.longRest : t.restReady)}</h1><p class="rh-sub">${esc(t.restReadySub)}</p><p class="rh-caption">${esc(restLength(s))}</p><div class="rh-actions">${button(t.startRest,'start-rest','rh-primary')}${button(t.later,'return-home','rh-link')}</div><p class="rh-caption">${esc(t.confirmAlways)}</p></main>`;
+    if (s.stage === 'readyFocus') return `<main class="rh-running"><span class="rh-kicker">${esc(t.setupHeading)}</span><h1>${esc(t.nextReady)}</h1><p class="rh-sub">${esc(t.nextSub)}</p><label class="rh-intention"><span class="rh-label">${esc(t.intention)}</span><input data-input="intention" maxlength="200" value="${esc(s.intention)}" placeholder="${esc(t.intentionPlaceholder)}"></label><div class="rh-actions">${button(t.startFocus,'start-focus','rh-primary')}${button(t.later,'return-home','rh-link')}</div><p class="rh-caption">${esc(t.confirmAlways)}</p></main>`;
+    return `<main class="rh-running"><span class="rh-kicker">${esc(t.ready)}</span><h1>${esc(t.pausedTitle)}</h1><p class="rh-sub">${esc(s.stoppedKind === 'focus' ? t.pausedSub : t.interrupted)}</p>${button(t.restartHome,'return-home','rh-primary')}</main>`;
+  }
+  function journal(s,t) {
+    const letters = [{text:s.sampleEdit === undefined ? t.sample : s.sampleEdit,sample:true},...s.letters];
+    return `<main class="rh-notebook"><aside class="rh-notebook-side"><span class="rh-kicker">${esc(t.journal)}</span><h2>${esc(t.earlier)}</h2><span class="rh-caption">${esc(t.previewOnly)}</span></aside><div class="rh-notebook-main"><h2>${esc(t.letterTitle)}</h2><p class="rh-sub" style="margin-top:12px">${esc(t.letterIntro)}</p>${letters.map((entry,i)=>`<article class="rh-letter-card"><span class="rh-caption">${esc(entry.sample?t.sampleLabel:t.newLetter)}</span>${s.editing === i ? `<label><span class="rh-label">${esc(t.edit)}</span><textarea data-input="edit" maxlength="4000">${esc(entry.text)}</textarea></label><div class="rh-edit-actions">${button(t.saveEdit,`save-edit-${i}`,'rh-primary')}${button(t.cancel,'cancel-edit','rh-link')}</div>` : `<p>${esc(entry.text)}</p>${button(t.edit,`edit-${i}`,'rh-link')}`}</article>`).join('')}</div></main>`;
+  }
+  function settings(s,t) {
+    const numeric = (key,title,min,max)=>`<label><span class="rh-label">${esc(title)}</span><input type="number" min="${min}" max="${max}" step="1" data-setting="${key}" value="${s[key]}" required></label>`;
+    const selector = (key,title,options)=>`<label><span class="rh-label">${esc(title)}</span><select data-setting="${key}">${options.map(([value,label])=>`<option value="${value}" ${s[key]===value?'selected':''}>${esc(label)}</option>`).join('')}</select></label>`;
+    return `<main class="rh-body"><div class="rh-settings"><h2>${esc(t.advancedTitle)}</h2><p class="rh-sub">${esc(t.advancedIntro)}</p><h3>${esc(t.durationTitle)}</h3><div class="rh-fields">${numeric('focus',t.focusMinutes,1,180)}${numeric('short',t.shortMinutes,1,180)}${numeric('long',t.longMinutes,1,180)}${numeric('every',t.every,1,12)}</div><h3>${esc(t.experienceTitle)}</h3><div class="rh-fields">${selector('language',t.language,[['system',t.languageSystem],['en','English'],['zh-Hans','简体中文'],['zh-Hant','繁體中文']])}${selector('appearance',t.appearance,[['system',t.appearanceSystem],['light',t.light],['dark',t.dark]])}${selector('restStyle',t.restStyle,[['invitation',t.invitation],['screen',t.screen]])}</div><p class="rh-setting-notice">${esc(t.confirmAlways)}</p>${button(t.apply,'apply-settings','rh-primary')}<p class="rh-alert" role="status">${esc(s.notice)}</p><div class="rh-private-row"><span>${esc(t.cloud)}</span><span>${esc(t.ai)}</span></div><p class="rh-setting-notice">${esc(t.advancedFuture)}</p></div></main>`;
+  }
+  function render(key) {
+    const s=state[key], t=words(s), app=apps[key];
+    app.lang=lang(s);
+    if(s.appearance==='system')app.style.removeProperty('color-scheme');else app.style.colorScheme=s.appearance;
+    const stageLabels={home:t.hello,focus:t.focusTitle,focusComplete:t.focused,readyRest:t.restReady,rest:t.restTitle,restComplete:t.restDone,readyFocus:t.nextReady,stopped:t.pausedTitle};
+    app.innerHTML=header(s,t)+(s.view==='journal'?journal(s,t):s.view==='advanced'?settings(s,t):s.stage==='home'?home(key,s,t):moment(s,t))+footer(t)+`<div class="rh-status" role="status" aria-live="polite">${esc(s.view==='now'?stageLabels[s.stage]:t[s.view])}</div>`;
+    root.querySelector(`[data-demo-label="${key}"]`).textContent=t.demo;
+    const finish = root.querySelector(`[data-demo-end="${key}"]`);
+    finish.textContent=t.finish;
+    finish.disabled=!['focus','rest'].includes(s.stage);
+    root.querySelector(`[data-demo-reset="${key}"]`).textContent=t.restart;
+    if (globalThis.lucide) lucide.createIcons({attrs:{width:18,height:18}});
+  }
+  function complete(key) {
+    const s=state[key];
+    if(s.stage==='focus'){ s.completed++; s.stage='focusComplete'; }
+    else if(s.stage==='rest'){ if(s.activeRestType==='long')s.completed=0; s.activeRestType=null; s.stage='restComplete'; }
+    else return;
+    s.view='now'; s.draft=''; render(key);
+  }
+  root.addEventListener('input',event=>{
+    const app=event.target.closest('[data-app]');
+    if(!app)return;
+    const s=state[app.dataset.app];
+    if(event.target.dataset.input==='intention')s.intention=event.target.value;
+    if(event.target.dataset.input==='draft')s.draft=event.target.value;
+  });
+  root.addEventListener('change',event=>{
+    const app=event.target.closest('[data-app]');
+    if(!app)return;
+    const key=app.dataset.app,s=state[key],setting=event.target.dataset.setting;
+    if(setting==='language' || setting==='appearance'){
+      // Preserve numeric edits while translating the current settings view.
+      app.querySelectorAll('input[data-setting]').forEach(input=>{const number=Number(input.value);if(Number.isInteger(number)&&number>=1&&number<=(input.dataset.setting==='every'?12:180))s[input.dataset.setting]=number;});
+      s[setting]=event.target.value;s.notice='';render(key);remember();
+    }
+  });
+  root.addEventListener('click',event=>{
+    const end=event.target.closest('[data-demo-end]');
+    if(end){complete(end.dataset.demoEnd);return;}
+    const reset=event.target.closest('[data-demo-reset]');
+    if(reset){const key=reset.dataset.demoReset;const previous=state[key];state[key]=makeState();state[key].language=previous.language;state[key].appearance=previous.appearance;render(key);return;}
+    const target=event.target.closest('[data-action]');
+    if(!target)return;
+    const app=target.closest('[data-app]'),key=app.dataset.app,s=state[key],t=words(s),action=target.dataset.action;
+    if(action.startsWith('view-')){s.view=action.slice(5);s.notice='';s.editing=null;}
+    else if(action==='start-focus'){s.stage='focus';s.view='now';s.draft='';}
+    else if(action==='start-rest'){s.activeRestType=longRestDue(s)?'long':'short';s.stage='rest';s.view='now';}
+    else if(action==='stop'){s.stoppedKind=s.stage;s.stage='stopped';}
+    else if(action==='return-home'){s.stage='home';s.view='now';}
+    else if(action==='keep-reflection' || action==='skip-reflection'){
+      if(action==='keep-reflection' && s.draft.trim())s.letters.push({text:s.draft.trim(),sample:false});
+      s.draft='';s.stage=s.stage==='focusComplete'?'readyRest':'readyFocus';
+    }
+    else if(action.startsWith('idea-'))s.restIdea=action.slice(5);
+    else if(action.startsWith('edit-'))s.editing=Number(action.slice(5));
+    else if(action==='cancel-edit')s.editing=null;
+    else if(action.startsWith('save-edit-')){
+      const index=Number(action.slice(10));const text=app.querySelector('[data-input="edit"]').value;
+      if(index===0)s.sampleEdit=text;else s.letters[index-1].text=text;s.editing=null;
+    }
+    else if(action==='apply-settings'){
+      const values={};let valid=true;
+      app.querySelectorAll('[data-setting]').forEach(input=>{
+        const setting=input.dataset.setting;
+        if(['focus','short','long','every'].includes(setting)){
+          const value=Number(input.value);if(!Number.isInteger(value)||value<1||value>(setting==='every'?12:180))valid=false;values[setting]=value;
+        } else values[setting]=input.value;
+      });
+      if(valid){Object.assign(s,values);s.notice=words(s).applied;}else s.notice=t.validation;
+    }
+    render(key);remember();
+  });
+  window.addEventListener('openai:set_globals',event=>{
+    if(event.detail && event.detail.globals && event.detail.globals.widgetState){restore(event.detail.globals.widgetState);Object.keys(apps).forEach(render);}
+  });
+  Object.keys(apps).forEach(render);
+  if(globalThis.Tweak){
+    for(const key of Object.keys(apps)){
+      const controls={moment:'home'};
+      const tweak=new Tweak({container:apps[key],onChange:()=>{if(stages.includes(controls.moment)){state[key].stage=controls.moment;state[key].view='now';if(controls.moment==='readyRest' && state[key].completed===0)state[key].completed=1;if(controls.moment==='rest')state[key].activeRestType=longRestDue(state[key])?'long':'short';render(key);}}});
+      tweak.addSelect(controls,'moment',{label:'Preview moment',options:[{label:'Arrival',value:'home'},{label:'Quiet focus',value:'focus'},{label:'Focus reflection',value:'focusComplete'},{label:'Confirm rest',value:'readyRest'},{label:'Genuine rest',value:'rest'},{label:'Rest reflection',value:'restComplete'},{label:'Confirm focus',value:'readyFocus'}]});
+    }
+  }
+})();
+</script>

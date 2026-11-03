@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "Rhythm — Focus & Break",
+  "short_name": "Rhythm",
+  "description": "A private, gentle companion for focus and recovery.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#18221f",
+  "theme_color": "#18221f",
+  "lang": "en",
+  "icons": [
+    { "src": "assets/rhythm-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" },
+    { "src": "assets/rhythm-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/rhythm-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

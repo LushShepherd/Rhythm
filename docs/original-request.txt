@@ -1,0 +1,150 @@
+# Project Rhythm — Product & Development Specification
+
+I want to build **Rhythm**, a lightweight, cross-platform personal rhythm companion using Rust.
+
+Its purpose is to help people protect their attention, take genuine breaks, and preserve personal reflections. It should not feel like a conventional Pomodoro timer or productivity tracker.
+
+## 1. Product Philosophy
+- Protect attention rather than measure productivity.
+- Encourage genuine rest rather than maximize working hours.
+- Support personal reflection rather than performance reporting.
+- Keep the experience quiet, warm, gentle and unobtrusive.
+- Require minimal configuration and user interaction.
+- Respect user privacy and data ownership.
+
+Guiding principle: Rhythm should help people stay present, protect their attention, rest properly, and leave meaningful words for their future selves.
+
+## 2. Default Rhythm
+The application must work immediately without configuration.
+
+Default settings:
+- Focus: 25 minutes.
+- Short rest: 5 minutes.
+- Long rest: 30 minutes.
+- Long rest after every 3 completed focus periods.
+- Require user confirmation before starting the next period.
+
+Customization should be available in Advanced Settings rather than the primary interface.
+
+## 3. Focus and Rest Experiences
+
+**Focus mode**
+- No prominent countdown, progress bar or distracting animation.
+- Quiet, distraction-minimized fullscreen interface.
+- Optional notes and intentions.
+- Support platform-specific focus integrations where possible.
+
+**Rest mode**
+- Noticeably interrupt the user and encourage genuine rest.
+- Suggest walking, hydration, eye rest and relaxation.
+- Support configurable rest enforcement.
+- Allow emergency exit.
+- Never automatically resume focus without confirmation.
+
+## 4. Personal Reflection
+Provide optional, warm reflection prompts at the end of focus and rest periods.
+
+Notes should feel like small letters between different versions of oneself, not task reports.
+
+Support:
+- Recording thoughts, experiences and emotions.
+- Leaving messages for future selves.
+- Recording intentions for upcoming sessions.
+- Editing and revisiting historical reflections.
+
+Never force users to write notes.
+
+## 5. Flexible Scheduling
+Support:
+- Default repeating focus-rest cycles.
+- Multiple recurring schedules.
+- Custom weekdays and daily routines.
+- Custom focus and rest durations.
+- One-time custom-length sessions.
+
+Keep advanced scheduling configuration unobtrusive.
+
+## 6. Journal and AI Reviews
+- SQLite as the primary local database.
+- Markdown export for daily, weekly and monthly journals.
+- Obsidian compatibility.
+- Daily, weekly and monthly statistics.
+- Optional AI-powered personal reviews.
+- Configurable cloud AI APIs and local models through Ollama.
+- SQL for reliable statistics; AI for qualitative reflection.
+- AI processing must be opt-in, transparent and privacy-conscious.
+
+## 7. Cross-Platform Synchronization
+
+Support optional user-controlled synchronization without operating a central Rhythm server or requiring a Rhythm account.
+
+Target synchronization providers:
+1. Google Drive — first implementation, using its application-specific data folder.
+2. OneDrive.
+3. WebDAV / Nextcloud.
+4. S3-compatible storage, including Cloudflare R2.
+5. Consider Syncthing for advanced users.
+
+Requirements:
+- Independent local SQLite databases.
+- Provider-independent synchronization engine.
+- Synchronize versioned logical records, never live SQLite database files.
+- Support offline operation, conflict detection and recovery.
+- Preserve conflicting user reflections rather than silently overwriting them.
+- Securely store provider credentials.
+- Design for optional end-to-end encryption.
+- Provide manual backups and Markdown export.
+
+Normal users should only need to connect and authorize their cloud account. Advanced provider configuration should remain optional.
+
+## 8. GUI and Internationalization
+- Minimalist, warm and calming visual personality.
+- Adaptive light/dark appearance following system preferences.
+- No prominent time displays during focus.
+- Neutral colors, subtle animations and simple navigation.
+- Responsive desktop and mobile layouts.
+- Internationalization from the beginning.
+- Initial languages: English, Simplified Chinese and Traditional Chinese.
+- System-language detection and manual language selection.
+
+GUI design is not finalized. Explore wireframes and prototypes before selecting a framework.
+
+## 9. Supported Platforms
+- Windows 11
+- macOS
+- Fedora/Linux
+- Android
+- iOS
+
+Use a shared Rust application core and platform-specific integrations where necessary.
+
+## 10. Technical Requirements
+- Primary language: Rust.
+- Evaluate Tauri 2, Flutter with a Rust core, and native UI alternatives.
+- Modular architecture.
+- Reliable monotonic-clock-based timer engine.
+- SQLite persistence and database migrations.
+- Platform-specific notifications and lifecycle handling.
+- Automated tests and documentation.
+
+## 11. Development Approach
+Before implementation:
+1. Review the complete requirements.
+2. Compare cross-platform architectures and synchronization approaches.
+3. Explore UI wireframes and prototypes.
+4. Evaluate mobile background execution and platform restrictions.
+5. Design the local database and synchronization protocol.
+6. Propose a phased development roadmap.
+
+Implement incrementally, prioritizing:
+- Reliable timer engine.
+- Personal reflection journal.
+- SQLite persistence.
+- Minimal cross-platform interface.
+- Synchronization.
+- Markdown export and statistics.
+- AI-powered reviews.
+
+Avoid unnecessary productivity features, gamification and complicated configuration.
+
+**The ultimate goal is to create a private, calm and portable space that helps people find their own rhythm, take care of themselves, and maintain a conversation with their future selves.**

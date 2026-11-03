@@ -1,0 +1,15 @@
+{
+  "name": "rhythm-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "A private companion for focus and recovery",
+  "scripts": {
+    "tauri": "tauri",
+    "preview": "node ../../scripts/preview.mjs",
+    "test": "node --test ui/model.test.mjs ui/browser.test.mjs ui/backgrounds.test.mjs ui/profile-backup.test.mjs ui/note-history.test.mjs ui/note-archive.test.mjs ui/history-query.test.mjs ui/note-provenance.test.mjs ui/adaptive.test.mjs ui/sync.test.mjs ui/auto-sync.test.mjs ui/install.test.mjs ui/break-invitation.test.mjs ui/reminder-delay.test.mjs"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.0"
+  }
+}

@@ -1,0 +1,22 @@
+[package]
+name = "rhythm-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+rhythm-application = { path = "../rhythm-application" }
+rhythm-domain = { path = "../rhythm-domain" }
+rhythm-storage = { path = "../rhythm-storage" }
+rhythm-desktop-service = { path = "../rhythm-desktop-service" }
+rhythm-control = { path = "../rhythm-control" }
+serde_json.workspace = true
+uuid.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true

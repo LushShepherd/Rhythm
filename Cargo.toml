@@ -1,0 +1,42 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/rhythm-domain",
+    "crates/rhythm-application",
+    "crates/rhythm-storage",
+    "crates/rhythm-cli",
+    "crates/rhythm-control",
+    "crates/rhythm-platform-windows",
+    "crates/rhythm-desktop-service",
+    "crates/rhythm-sync",
+    "apps/desktop/src-tauri",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+publish = false
+license = "MIT"
+
+[workspace.dependencies]
+rhythm-domain = { path = "crates/rhythm-domain" }
+rhythm-application = { path = "crates/rhythm-application" }
+rhythm-storage = { path = "crates/rhythm-storage" }
+rhythm-platform-windows = { path = "crates/rhythm-platform-windows" }
+rhythm-desktop-service = { path = "crates/rhythm-desktop-service" }
+rhythm-sync = { path = "crates/rhythm-sync" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+uuid = { version = "1", features = ["v4", "serde"] }
+rusqlite = { version = "0.41", features = ["bundled", "backup"] }
+sha2 = "0.10"
+tempfile = "3"
+proptest = "1"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = "warn"
